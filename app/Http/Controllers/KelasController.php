@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\InsertKelasTable;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 
@@ -48,7 +47,7 @@ class KelasController extends Controller
     public function show(string $id)
     {
         //
-        $kelas = Kelas::findOrFail($id);
+        $kelas = Kelas::find($id);
         
         return response()->json(['kelas'=>$kelas]);
     }
@@ -67,7 +66,7 @@ class KelasController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $kelas = Kelas::findOrFail($id);
+        $kelas = Kelas::find($id);
         $kelas->namaKelas = $request->input('namaKelas');
         $kelas->listSiswa = $request->input('listSiswa');
         $kelas->save();

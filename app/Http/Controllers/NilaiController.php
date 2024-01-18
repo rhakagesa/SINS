@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nilai;
 use Illuminate\Http\Request;
 
 class NilaiController extends Controller
@@ -12,6 +13,9 @@ class NilaiController extends Controller
     public function index()
     {
         //
+        $nilai = Nilai::get();
+
+        return response()->json(['nilai'=>$nilai]);
     }
 
     /**
@@ -28,6 +32,17 @@ class NilaiController extends Controller
     public function store(Request $request)
     {
         //
+        $nilai = new Nilai;
+        $nilai->mataPelajaran = $request->input('mataPelajaran');
+        $nilai->latihanSoal = $request->input('latihanSoal');
+        $nilai->ulanganHarian = $request->input('ulanganHarian');
+        $nilai->UTS = $request->input('UTS');
+        $nilai->UAS = $request->input('UAS');
+        $nilai->avgScore = $nilai->calculateScore($nilai->latihanSoal, $nilai->ulanganHarian);
+
+        $nilai->save();
+
+        return response()->json(['message'=>'berhasil menambahkan nilai', 'nilai'=>$nilai]);
     }
 
     /**
@@ -52,6 +67,17 @@ class NilaiController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $nilai = Nilai::find($id);
+        $nilai->mataPelajaran = $request->input('mataPelajaran');
+        $nilai->latihanSoal = $request->input('latihanSoal');
+        $nilai->ulanganHarian = $request->input('ulanganHarian');
+        $nilai->UTS = $request->input('UTS');
+        $nilai->UAS = $request->input('UAS');
+        $nilai->avgScore = $nilai->calculateScore($nilai->latihanSoal, $nilai->ulanganHarian);
+
+        $nilai->save();
+
+        return response()->json(['message'=>'berhasil memperbarui nilai', 'nilai'=>$nilai]);
     }
 
     /**
