@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,8 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/kelas', [KelasController::class, 'index']);
 Route::get('/kelas/show/{id}', [KelasController::class, 'show']);
-Route::put('kelas/update/{id}', [KelasController::class, 'update']);
 Route::post('/kelas/post', [KelasController::class, 'store']);
+Route::put('/kelas/update/{id}', [KelasController::class, 'update']);
+
 
 Route::get('/nilai', [NilaiController::class, 'index']);
-Route::post('nilai/post', [NilaiController::class, 'store']);
+Route::post('/nilai/post', [NilaiController::class, 'store']);
+Route::put('/nilai/update/{id}', [NilaiController::class, 'update']);
+
+Route::get('/siswa', [SiswaController::class, 'index']);
+Route::post('/siswa/post', [SiswaController::class, 'store']);
+Route::put('/siswa/update/{id}', [SiswaController::class, 'update']);

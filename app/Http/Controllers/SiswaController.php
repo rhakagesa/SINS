@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nilai;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -12,6 +14,14 @@ class SiswaController extends Controller
     public function index()
     {
         //
+        $siswa = Siswa::get(['namaSiswa']);
+
+        foreach($siswa as $siswaItem){
+            $nilai = Nilai::get(['mataPelajaran','avgScore']);
+            $siswaItem->nilaiMataPelajaran = $nilai;
+        }
+
+        return response()->json(['siswa'=>$siswa]);
     }
 
     /**
@@ -28,6 +38,12 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         //
+        $siswa = new Siswa;
+        $siswa->namaSiswa = $request->input('namaSiswa');
+
+        $siswa->save();
+
+        return response()->json(['message'=>'berhasil menambahkan siswa', 'siswa'=>$siswa]);
     }
 
     /**
@@ -52,6 +68,12 @@ class SiswaController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $siswa = Siswa::find($id);
+        $siswa->namaSiswa = $request->input('namaSiswa');
+
+        $siswa->save();
+
+        return response()->json(['message'=>'berhasil memperbarui siswa', 'siswa'=>$siswa]);
     }
 
     /**

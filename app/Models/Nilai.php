@@ -11,13 +11,8 @@ class Nilai extends Model
     protected $connection = 'mongodb';
     protected $collection = 'nilai';
     protected $primaryKey = '_id';
-    protected $fillable = ['mataPelajaran', 'latihanSoal', 'ulanganHarian', 'UTS', 'UAS', 'avgScore', 'siswa_id'];
+    protected $fillable = ['mataPelajaran', 'latihanSoal', 'ulanganHarian', 'UTS', 'UAS', 'avgScore'];
     public $timestamps = false;
-
-    public function siswa()
-    {
-        return $this->belongsTo(Siswa::class, 'siswa_id');
-    }
 
     public function calculateScore($arrayLatihanSoal, $arrayUlanganHarian){
         $avgLatihanSoal = ($arrayLatihanSoal[0] + $arrayLatihanSoal[1] + $arrayLatihanSoal[2] + $arrayLatihanSoal[3]) / 4;

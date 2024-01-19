@@ -13,9 +13,5 @@ class Siswa extends Model
     protected $primaryKey = '_id';
     protected $fillable = ['namaSiswa', 'nilaiMataPelajaran'];
     public $timestamps = false;
-
-    public function nilaiMataPelajaran()
-    {
-        return $this->hasOne(Nilai::class, 'siswa_id');
-    }
+    
 }
