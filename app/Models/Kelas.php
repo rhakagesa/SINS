@@ -14,4 +14,8 @@ class Kelas extends Model
     protected $fillable = ['namaKelas', 'listSiswa'];
     public $timestamps = false;
     
+    public function relationSiswa()
+    {
+        return $this->hasMany(Siswa::class, 'kelas_id');
+    }
 }

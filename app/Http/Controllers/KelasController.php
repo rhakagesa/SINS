@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kelas;
-use App\Models\Siswa;
 
 class KelasController extends Controller
 {
@@ -17,7 +16,7 @@ class KelasController extends Controller
         $kelas = Kelas::get(['namaKelas']);
 
         foreach ($kelas as $kelasItem) {
-            $siswa = Siswa::get(['namaSiswa']);
+            $siswa = $kelasItem->relationSiswa()->get(['namaSiswa']);
             $kelasItem->listSiswa = $siswa;
         }
 

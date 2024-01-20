@@ -39,6 +39,7 @@ class NilaiController extends Controller
         $nilai->UTS = $request->has('UTS') ? $request->input('UTS') : (random_int(70, 100));
         $nilai->UAS = $request->has('UAS') ? $request->input('UAS') : (random_int(70, 100));
         $nilai->avgScore = $nilai->calculateScore($nilai->latihanSoal, $nilai->ulanganHarian);
+        $nilai->siswa_id = $request->input('siswa_id');
 
         $nilai->save();
 
@@ -51,6 +52,9 @@ class NilaiController extends Controller
     public function show(string $id)
     {
         //
+        $nilai = Nilai::find($id);
+
+        return response()->json(['nilai'=>$nilai]);
     }
 
     /**
@@ -74,6 +78,7 @@ class NilaiController extends Controller
         $nilai->UTS = $request->input('UTS');
         $nilai->UAS = $request->input('UAS');
         $nilai->avgScore = $nilai->calculateScore($nilai->latihanSoal, $nilai->ulanganHarian);
+        $nilai->siswa_id = $request->input('siswa_id');
 
         $nilai->save();
 

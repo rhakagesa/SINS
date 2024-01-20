@@ -28,9 +28,11 @@ Route::put('/kelas/update/{id}', [KelasController::class, 'update']);
 
 
 Route::get('/nilai', [NilaiController::class, 'index']);
+Route::get('/nilai/show/{id}', [NilaiController::class, 'show']);
 Route::post('/nilai/post', [NilaiController::class, 'store']);
 Route::put('/nilai/update/{id}', [NilaiController::class, 'update']);
 
 Route::get('/siswa', [SiswaController::class, 'index']);
+Route::get('/siswa/show/{id}', [SiswaController::class, 'show']);
 Route::post('/siswa/post', [SiswaController::class, 'store']);
 Route::put('/siswa/update/{id}', [SiswaController::class, 'update']);
